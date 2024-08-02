@@ -1,1 +1,1 @@
-# SentimentAnalyzer
+SentimentAnalyzer is a backend application designed to perform sentiment analysis on input text. Leveraging Flask for the web framework and SQLAlchemy for database interactions, it efficiently parses and analyzes text data. The application includes middleware for JSON parsing, ensuring smooth data handling. By registering specific routes, it facilitates easy analysis of sentiments in various texts. Set to run on a designated port, it stands ready to integrate with frontend applications or work as a standalone sentiment analysis tool.
