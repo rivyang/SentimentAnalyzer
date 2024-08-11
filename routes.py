@@ -9,15 +9,14 @@ app = Flask(__name__)
 
 @app.route('/analyze', methods=['POST'])
 def sentiment_analysis():
-    data = request.get_json(force=True)
+    data = request.json or {}
     text = data.get('text', '').strip()
     
     if not text:
         return jsonify({"error": "No text provided"}), 400
-    
+
     result = analyze_sentiment(text)
-    return jsonify(result), 200
+    return jsonify(result)
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
