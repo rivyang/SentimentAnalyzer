@@ -12,7 +12,27 @@ def analyze_sentiment(text):
         "subjectivity": sentiment.subjectivity
     }
 
-if __name__ == "__main__":
+def analyze_sentiment_from_file(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
+            return analyze_sentiment(text)
+    except FileNotFoundError:
+        return "The specified file does not exist."
+
+def main():
+    # Direct text analysis
     text = "I really enjoy learning with ChatGPT, it's so insightful and engaging!"
     result = analyze_sentiment(text)
-    print(f"Sentiment Analysis Result: {result}")
+    print(f"Sentiment Analysis Result (direct text): {result}")
+
+    # Sentiment analysis from a file
+    file_path = os.getenv("SENTIMENT_FILE")
+    if file_path:
+        file_result = analyze_sentiment_from_file(file_path)
+        print(f"Sentiment Analysis Result (from file): {file_result}")
+    else:
+        print("No file path specified in environment variables for sentiment analysis.")
+
+if __name__ == "__main__":
+    main()
