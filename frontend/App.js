@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from 'react';
 
-const readHistoryFromLocalStorage = () => {
-  const savedHistory = localStorage.getItem('reviewHistory');
-  return savedHistory ? JSON.parse(savedHistory) : [];
+const retrieveHistoryFromLocalStorage = () => {
+  const savedReviews = localStorage.getItem('reviewHistory');
+  return savedReviews ? JSON.parse(savedReviews) : [];
 };
 
 function ReviewHistory() {
-  const [history, setHistory] = useState([]);
+  const [reviewHistory, setReviewHistory] = useState([]);
 
   useEffect(() => {
-    const savedHistory = readHistoryFromLocalStorage();
-    setHistory(savedHistory);
+    const loadedReviewHistory = retrieveHistoryFromLocalStorage();
+    setReviewHistory(loadedReviewHistory);
   }, []);
 
-  if (history.length === 0) {
-    return <div><h2>Review History</h2><p>No reviews yet.</p></div>;
+  if (reviewHistory.length === 0) {
+    return (
+      <div>
+        <h2>Review History</h2>
+        <p>No reviews yet.</p>
+      </div>
+    );
   }
 
   return (
     <div>
       <h2>Review History</h2>
       <ul>
-        {history.map((entry, index) => {
-          const sentimentDisplayText = `${entry.review} - Sentiment: ${entry.sentiment}`;
-          return <li key={index}>{sentimentDisplayText}</li>;
+        {reviewHistory.map((reviewEntry, index) => {
+          const displayText = `${reviewEntry.review} - Sentiment: ${reviewEntry.sentiment}`;
+          return <li key={index}>{displayText}</li>;
         })}
       </ul>
     </div>
