@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
+  useEffect(() => {
+    console.log("Header component has been rendered or updated."); 
+  });
+
   const submitReviewPath = process.env.REACT_APP_SUBMIT_REVIEW_PATH;
   const viewResultsPath = process.env.REACT_APP_VIEW_RESULTS_PATH;
 
